@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💗</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff9a9e,#fecfef);
+  text-align:center;
+  color:white;
+  overflow:hidden;
+}
+
+section{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
+button{
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  margin:10px;
+  transition:0.3s;
+}
+
+#yesBtn{
+  background:#ff4d6d;
+  color:white;
+}
+
+#noBtn{
+  background:white;
+  color:#ff4d6d;
+  position:absolute;
+}
+
+input{
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  text-align:center;
+  font-size:16px;
+  margin-top:15px;
+}
+
+#passwordPage, #menuPage, #photoPage, #messagePage{
+  display:none;
+}
+
+/* PHOTO PAGE */
+.photo-gallery{
+  height:350px;
+  overflow-y:auto;
+  width:90%;
+}
+
+.photo-gallery img{
+  width:100%;
+  max-width:250px;
+  margin:10px;
+  border-radius:20px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* MESSAGE PAGE */
+.love-text{
+  height:350px;
+  overflow-y:auto;
+  padding:20px;
+  background:rgba(255,255,255,0.25);
+  border-radius:20px;
+  width:85%;
+  line-height:1.8;
+  text-align:left;
+  box-sizing:border-box;
+}
+
+/* Falling hearts */
+.heart{
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  to{ transform:translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<section id="firstPage">
+  <h1>Do you want to know why I love you? 💗</h1>
+  <button id="yesBtn" onclick="goToPassword()">Yes 💗</button>
+  <button id="noBtn" onclick="moveNo()">No 💗</button>
+</section>
+
+<!-- PAGE 2 PASSWORD -->
+<section id="passwordPage">
+  <h2>Enter The Secret Code 💗</h2>
+  <input type="password" id="passwordInput" placeholder="Password">
+  <button onclick="checkPassword()">Enter 💗</button>
+</section>
+
+<!-- PAGE 3 MENU -->
+<section id="menuPage">
+  <h2>Choose One 💗</h2>
+  <button onclick="openPhotos()">Photos of Us 💗</button>
+  <button onclick="openMessage()">Message for You 💗</button>
+</section>
+
+<!-- PAGE 4 PHOTOS -->
+<section id="photoPage">
+  <h2>Our Memories 💗</h2>
+  <div class="photo-gallery">
+    <!-- ADD YOUR PHOTOS HERE -->
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+  </div>
+  <button onclick="backToMenu()">Back 💗</button>
+</section>
+
+<!-- PAGE 5 MESSAGE -->
+<section id="messagePage">
+  <h2>For You 💗</h2>
+  <div class="love-text" id="text"></div>
+  <button onclick="backToMenu()">Back 💗</button>
+
+  <audio id="bgMusic" loop>
+    <source src="lagu.mp3" type="audio/mpeg">
+  </audio>
+</section>
+
+<script>
+
+let scale = 1;
+
+function moveNo(){
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
+
+  noBtn.style.left = Math.random()*maxX + "px";
+  noBtn.style.top = Math.random()*maxY + "px";
+
+  scale += 0.2;
+  yesBtn.style.transform = `scale(${scale})`;
+
+  if(scale >= 3){
+    noBtn.style.display="none";
+  }
+}
+
+function goToPassword(){
+  document.getElementById("firstPage").style.display="none";
+  document.getElementById("passwordPage").style.display="flex";
+}
+
+function checkPassword(){
+  const pass = document.getElementById("passwordInput").value;
+  if(pass === "7825"){
+    document.getElementById("passwordPage").style.display="none";
+    document.getElementById("menuPage").style.display="flex";
+  }else{
+    alert("Wrong password 💗");
+  }
+}
+
+function openPhotos(){
+  document.getElementById("menuPage").style.display="none";
+  document.getElementById("photoPage").style.display="flex";
+}
+
+function openMessage(){
+  document.getElementById("menuPage").style.display="none";
+  document.getElementById("messagePage").style.display="flex";
+  startTyping();
+  document.getElementById("bgMusic").play();
+  createHearts();
+}
+
+function backToMenu(){
+  document.getElementById("photoPage").style.display="none";
+  document.getElementById("messagePage").style.display="none";
+  document.getElementById("menuPage").style.display="flex";
+}
+
+const message = `
+baby, i might not be able to put together the perfect words, but today i want you to truly know how much your presence means to me. why do i love you? the answer is actually very simple yet so deep. i love you because with you, i feel like i’ve finally found my 'home.' i love you because you’re the first person who makes me feel so safe to be my honest self, without masks, and without the fear of being judged. thank you for staying with me even when i cause trouble, or when i unconsciously do things you don't like, or anything like that. thank you for accepting all my flaws and still choosing to stay even when i feel the most difficult to love.
+i want you to know that i love you exactly as you are. you never have to try to be someone else for me; i love every single thing about you—your quirks, your habits, and your soul. to be honest, i didn’t always know why i loved you, but it’s something that grew so beautifully once we became close. i fell for your character, the way you speak, the way you think, and the way you handle life. i love everything related to you, and i mean it when i say i love you more than you could ever imagine. this isn't a game to me; my feelings are real and i am completely serious about us.
+i am so grateful for the little things you often think are ordinary, when to me, they are everything. i love how you always manage to make me feel special, the way you remember the little things that even i forget, and how you always have a way to calm the storm in my head just by being there. you’re not just a partner, but also the best friend i share laughs, tears, and all the silly stories we have. i love you because you don’t just love my strengths, but you’re also patient in guiding me and making me want to keep growing into a better person every day.
+more than that, i love you because of the way you treat me, which i believe is with such sincere affection. seeing the way you teach me about things, and the way you make me feel like you prioritize 'us', makes me realize that you are truly the man i want. thank you for being a strong shoulder to lean on when i’m tired and for being the main reason behind my smile every morning. i’m so lucky to have you, and i promise to keep cherishing, protecting, and loving you in the most sincere way i can. i love you, today, tomorrow, and forever. i’m sorry for everything that has happened.
+`;
+
+let i = 0;
+function startTyping(){
+  if(i < message.length){
+    document.getElementById("text").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(startTyping,35);
+  }
+}
+
+function createHearts(){
+  setInterval(()=>{
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="💗";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (Math.random()*3+2)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>{heart.remove();},5000);
+  },300);
+}
+
+</script>
+
+</body>
+</html>
